@@ -21,7 +21,9 @@ custom_theme = Theme({
     "highlight": "bold cyan"
 })
 console = Console(theme=custom_theme)
-
+def check():
+    """Check if the CLI is running correctly"""
+    console.print("CLI is running correctly!", style="success")
 # Load environment variables
 load_dotenv()
 
