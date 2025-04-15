@@ -1,0 +1,27 @@
+# Core dependencies
+typer==0.9.0
+rich==13.7.0
+python-dotenv==1.0.0
+
+# Database
+supabase==2.3.1
+
+# AI services
+deepseek==0.1.2
+fireflies-ai==1.0.0
+
+# Office integration
+office365-rest-python-client==2.4.0
+
+# Pipedrive integration
+pipedrive-api==1.0.0
+
+# Utilities
+requests==2.31.0
+python-dateutil==2.8.2
+loguru==0.7.2
+
+# Development tools
+black==23.12.1
+isort==5.13.2
+pytest==7.4.4
