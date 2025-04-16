@@ -17,6 +17,7 @@ office365-rest-python-client
 requests
 python-dateutil
 loguru
+uuid
 
 # Development tools
 black
