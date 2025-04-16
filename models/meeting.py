@@ -16,7 +16,7 @@ class Meeting(BaseModel):
         id: Optional[UUID] = None,
         created_at: Optional[datetime] = None
     ):
-        self.id = id or uuid4()
+        self.id = id #consider changing this because supabase will be using UUIDs.
         self.meeting_type = meeting_type
         self.date = date
         self.summary = summary

@@ -1,13 +1,15 @@
 # GOAL:
+
 1. KPI's AND REPORTS:App to connect to services such as pipedrive and excels and generate kPI's and connect to deepseek AI and generate reports and emails them to people.
 2. App to connect to firefliy AI transcription services to download the transcript of meetings, store in database and connect to microsoft outlook and send it to partpicants via email.
 3. Scheduled Reports: Every certain intervals it will connect to supabase and to microsoft email to send follow up report.  
-3. Monitor some information in realtime (Streaming on one of my screen) (Needs to figure out how to do that)
-4. It shoud be visually appealing so i will be using rich to enhance the visuals.
-5. I will be using supabase for database, so it can be used on different PCs to avoid syncing problems. 
-6. Tasks that will be
+4. Monitor some information in realtime (Streaming on one of my screen) (Needs to figure out how to do that)
+5. It shoud be visually appealing so i will be using rich to enhance the visuals.
+6. I will be using supabase for database, so it can be used on different PCs to avoid syncing problems. 
+7. Tasks that will be
 
-# TO START 
+# TO START
+
 The beginning will be a very small application that can do small useful things as a starter. 
 
 1. Keep following up with my tasks and projects, keep a database to keep track of progress and how many times it has been and deadline.
@@ -37,17 +39,90 @@ The beginning will be a very small application that can do small useful things a
 6. Generate weekly reports from this information (no need for graphs at the mean time, text will be suffice. 
 
 # FUNCTIONAL REQUIREMENTS
+
 ## TASKS
 
+There are three functional requirements: User manual adding and removing tasks, retrieving tasks from firefly ai, automated tasks followup. 
+
+1. User should view, edit and list tasks.
+    1. TODO The ID's should be given to the tasks based on regular numbering (from 0 to 99) so it can be referred to later, this will be seperate than the UUID given in the database.
+    2. TODO User should be edit tasks based on thier numerical simple ID.
+    3. TODO  When the task is removed, the IDs are reset again. (It should always have sequential ID from 0 to 99).
+    4. The user should be able to filter tasks based on the employees assigned to. (So a command should display the tasks grouped by the person assigned to)
+2. Retrieving tasks from filefly AI:
+    1. User should enter a command, after the command is initiated, the app will connect to firefly ai through an api call.
+    2. The app then will download the transcript from the firefly and load it to its memory, then will be sent to deepseek to get a list of tasks to follow up with the user.
+    3. After retrieving the list of tasks, it will be viewed to the user and asks for confirmation then it will be commited to supabase database to be edited later.
+3. Automated tasks followup:
+    1. The user will enter a command and that command will initiate automated tasks followup.
+    2. The app will connect to supabase database, and based on this it will send follow up to each employee by using the employee's email that is in the database. 
+
 ## GOALS
-## PIPEDRIVE REPORTS
 
-## GOALS AND PROJECTS MANAGEMENT
+For goals, we have progress and employees who are involved in this goals. The app should follow up and send periodical reports for these goals. 
 
+1. TODO User should be able to view, edit, create the goals. Each goals should be based on a numerical ID (0-99)
+2. TODO once goal is removed, the ID's will be reset so they should be sequential (1 - 99).
+3. TODO Each interval the app will send a reminder to adjust the progress of the goals.
 
+## PIPEDRIVE REPORTS AND AUTOMATION
 
-# TODOS
+The pipedrive reports and follow ups will highly depend on the PIPEDRIVE HTTP REQUEST, the most important reports are three: Summary report, salespeople indivual report, and stuck and stalling deals.
+
+### GOAL OF THE REPORTS
+
+So the main goals that we're trying to tackle with is to make sure that:
+
+1. Sales people are proactive with their deals not leaving the deals without contacting the client.
+2. Collection, we usually finish and complete the job, but we dont get paid until we get the client to sign Material Delivery paper which is referred to (MDD) and sign good recives (GR).
+3. Remind sales people to update their pipedrive and follow their clients.
+
+### REPORTS AND INFORMATION
+
+1. Summary report from pipedrive: which has the goal to provide the overall performance, and then the second part of this summary report will be a list of all sales people and summary of their
+    1. The firdt report will contain the following information.
+        1. Number of total deals (to date).
+        2. the total value of deals (to date) compared from total value (to one month ago)
+        3. value of deals compared with value of deals with active deals. Active deals are with date of the update being less than 2 months ago.
+        4. Total value of deals that are done and still didn't recieve the payment (to date) compared to the same thing (to one month ago). (Deals that are under the stage "Awaiting MDD: which indicates deals that have been delivered, but waiting from the client to sign the Material Delivery paper, deals that are under stage "AWAITING GR: which indicates that material delivered paper were signed, but now awaiting from the client sign Good Recieved paper).
+    2. The second part of the report will have a list of sales people and with each sales people will have the following numbers in the summary:
+        1. Current pipeline value.
+        2. Number of stalled or stuck deals.(current) compared with same (to month ago) (deals not updated 2 months ago).
+        3. Total number of activities.(week to date) compared with last week.
+        4. Total number of deals that are under staged Awaiting MDD, and awaiting GR.(to date) compared with the same (to one month ago) 
+        5. Number of deals moved stages compared to last month.
+        6. Number of deals won. compared to last month
+        7. Numbers of deals lost. compared to last month.
+2. Sales people detailed reports for each sales person: this is a more detailed snapshot report for each sales person that is detailed.
+    1. Sales won deals value, to his target. (Quarter to date)
+    2. latest 5 deals that were added.
+    3. List of the stalled deals, and with thier last note entry. (not updated since 1 month ago).
+    4. List of the deals that are won.
+    5. List of the deals that are under stages (Awaiting MDD, Awaiting GR) which indicates deals that were done and awaiting client to sign on the material delivery and good recieved.
+    6. Top 5 deals in terms of value, and thier latest note.
+    7. The whole things should be fed to deepseek api, to generate a summary text.
+
+### AUTOMATION AND EMAILS AND FOLLOW UP
+
+1. Emailing and generating the summary reports with KPI:
+    1. The app using api pipedrive, grab the information.
+    2. the App converts the information to HTML, and format it.
+    3. Sending email to the designated people.
+
+2. Weekly sales indivual report
+    1. Every week, the app gather information through API HTTP call.
+    2. format the indivual sales report, format HTML.
+    3. connect to outlook API, and send it to email.
+
+## MEETINGS AND SUMMARIES
+
+For this meeting, the app will be grabbing the transcripts and other informatoin from firefly AI through an HTTP REQUEST API call, and then store it in supabase database and then based on those meeting, using deepseek AI, the app will make summaries, follow up and make certain conclusion.
+
+1. Retrieving meetings and storing it:
+    1. connect to the firefly api and retrieve the meetings from there. 
+
 ## Connections First
+
 1. Create the template files and file structure.
 2. Connect Deepseek API sucesfully for AI integration. 
 3. Connect to Pipedrive using API. 
@@ -166,4 +241,3 @@ mycli_app/
 
 
 
-This an app to 

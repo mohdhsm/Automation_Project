@@ -33,7 +33,7 @@ def create(
 def view(
     task_id: Optional[str] = typer.Argument(None, help="ID of task to view"),
     all: bool = typer.Option(False, "--all", help="View all tasks")
-) -> Dict[str, Union[str, Task, List[Task]]]:
+) -> Dict[str, Union[str, Task, List[Task]]]: #Why we used union? Because it gives the option of using a String, icnase of error, or a task or list of tasks.
     """View task(s)"""
     try:
         if all:

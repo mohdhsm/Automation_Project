@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from uuid import UUID
+from uuid import UUID, uuid4
 from datetime import datetime
 from typing import Optional, Dict, List
 from .base import BaseModel
@@ -32,29 +32,36 @@ class Task(BaseModel):
         """Create a new task"""
         return cls(**data)
 
+    _storage: Dict[UUID, 'Task'] = {}
+
     @classmethod
     def get(cls, id: UUID) -> Optional['Task']:
         """Get a task by ID"""
-        # Implementation depends on database backend
-        raise NotImplementedError
+        return cls._storage.get(id)
 
     @classmethod
     def get_all(cls) -> List['Task']:
         """Get all tasks"""
-        # Implementation depends on database backend
-        raise NotImplementedError
+        return list(cls._storage.values())
 
     @classmethod
     def update(cls, id: UUID, updates: Dict) -> Optional['Task']:
         """Update a task"""
-        # Implementation depends on database backend
-        raise NotImplementedError
+        task = cls._storage.get(id)
+        if not task:
+            return None
+            
+        for key, value in updates.items():
+            setattr(task, key, value)
+        return task
 
     @classmethod
     def delete(cls, id: UUID) -> bool:
         """Delete a task"""
-        # Implementation depends on database backend
-        raise NotImplementedError
+        if id in cls._storage:
+            del cls._storage[id]
+            return True
+        return False
 
     def increment_follow_up(self) -> None:
         """Increment the follow-up counter"""
