@@ -17,14 +17,14 @@ def create(
 ) -> Dict[str, Union[str, Task]]:
     """Create a new task"""
     try:
-        deadline_date = datetime.strptime(deadline, "%Y-%m-%d").date()
-        task = Task(
+        deadline_date = datetime.strptime(deadline, "%Y-%m-%d").date() # Here its adding the date
+        task = Task( #creat the task object
             title=title,
             description=description,
             deadline=deadline_date,
             assigned_to=assigned_to
         )
-        created_task = controller.create_task(task)
+        created_task = controller.create_task(task) #insert the task into the controller
         return {"status": "success", "task": created_task}
     except ValueError as e:
         return {"status": "error", "message": str(e)}
