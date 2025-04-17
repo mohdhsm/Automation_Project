@@ -28,7 +28,7 @@ def create(
         return {"status": "success", "task": created_task}
     except ValueError as e:
         return {"status": "error", "message": str(e)}
-
+## THESE ARE THE COMMAND
 @app.command()
 def view(
     task_id: Optional[str] = typer.Argument(None, help="ID of task to view"),
