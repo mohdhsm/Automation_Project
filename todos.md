@@ -62,10 +62,10 @@ The beginning will be a very small application that can do small useful things a
 There are three functional requirements: User manual adding and removing tasks, retrieving tasks from firefly ai, automated tasks followup. 
 
 1. User should view, edit and list tasks.
-    1. Tasks now have both a UUID and sequential ID (starting from 1)
-    2. Users can reference tasks using either ID type in commands
-    3. Sequential IDs increment and persist (don't reset when tasks are deleted)
-    4. The user should be able to filter tasks based on the employees assigned to. (So a command should display the tasks grouped by the person assigned to)
+    1. COMPLETED Tasks now have both a UUID and sequential ID (starting from 1)
+    2. DONE Users can reference tasks using either ID type in commands
+    3. DONE Sequential IDs increment and persist (don't reset when tasks are deleted)
+    4. TODO The user should be able to filter tasks based on the employees assigned to. (So a command should display the tasks grouped by the person assigned to)
 2. Retrieving tasks from filefly AI:
     1. User should enter a command, after the command is initiated, the app will connect to firefly ai through an api call.
     2. The app then will download the transcript from the firefly and load it to its memory, then will be sent to deepseek to get a list of tasks to follow up with the user.
@@ -136,20 +136,27 @@ So the main goals that we're trying to tackle with is to make sure that:
 For this meeting, the app will be grabbing the transcripts and other informatoin from firefly AI through an HTTP REQUEST API call, and then store it in supabase database and then based on those meeting, using deepseek AI, the app will make summaries, follow up and make certain conclusion.
 
 1. Retrieving meetings and storing it:
-    1. connect to the firefly api and retrieve the meetings from there. 
+    1. connect to the firefly api and retrieve the meetings from there.
 
 ## Connections First
 
 1. Create the template files and file structure.
-2. Connect Deepseek API sucesfully for AI integration. 
-3. Connect to Pipedrive using API. 
-4. Connect to microsoft API and access excel and email. 
-5. Connect to microsoft API and access teams. 
-6. Connect to fireflies ai api to retrieve the meetings and the meeting notes. 
+2. Connect Deepseek API sucesfully for AI integration.
+3. Connect to Pipedrive using API.
+4. Connect to microsoft API and access excel and email.
+5. Connect to microsoft API and access teams.
+6. Connect to fireflies ai api to retrieve the meetings and the meeting notes.
+
+## 1 NEXT TODOS (THIS IS THE CURRENT TODO LIST TO BE UPDATED DAILY BASED ON PROGRESS SHOULD HAVE ONLY 5 TODOS AT ALL TIME).
+
+1. TODO Create the goals models similiar to the tasks with added progress.
+2. TODO Create the goals view and controller.
+3. TODO Connect the goals to the main app via the CLI command.
+4. TODO Test the goals modules if it works.
+5. TODO Create the pipedrive service layer. (NO API JUST CONNECTION). 
 
 
-
-# Database schemas that will be implemented.
+## Database schemas that will be implemented.
 These will be created using supabase.
 
 == TASK TABLE ==

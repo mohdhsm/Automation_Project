@@ -79,11 +79,12 @@ def edit(
             return {"status": "error", "message": "No updates provided"}
             
             # Try to convert to int if it's a sequential ID
-            try:
-                task_id = int(task_id) if task_id.isdigit() else task_id
-            except ValueError:
-                pass
-            updated_task = controller.update_task(task_id, updates)
+        try:
+            task_id = int(task_id) if task_id.isdigit() else task_id
+        except ValueError:
+            pass
+        updated_task = controller.update_task(task_id, updates)
+
         return {"status": "success", "task": updated_task}
     except Exception as e:
         return {"status": "error", "message": str(e)}
