@@ -6,9 +6,26 @@
 4. Monitor some information in realtime (Streaming on one of my screen) (Needs to figure out how to do that)
 5. It shoud be visually appealing so i will be using rich to enhance the visuals.
 6. I will be using supabase for database, so it can be used on different PCs to avoid syncing problems. 
-7. Tasks that will be
+7. The main objective of this app is to provide with daily and weekly and even hourly updates. For now, I am not interested in monthly updates that any of my staff can do. It should keep me updated on daily basis on the main things in our work. 
 
-# TO START
+## INFORMATION THAT REQUIRES DAILY UPDATES WITH
+
+1. Pipedrive daily information:
+    1. Deals that have moved through the stages.
+    2. Deals added.
+    3. Notes that have been added.
+    4. Activities that have been done. 
+    5. Short summary report about everyone doing in today.
+2. Daily and weekly goals: Since the focus app on the short term.
+    1. Daily and weekly sales and visit report (customer visit report).
+    2. Daily and weekly report on followup tasks.
+    3. Daily and weekly reminders on commitment that been said on a meeting. 
+3. Streaming log that summarizes all the information:
+    1. Running every 5 minutes.
+    2. It should be a while loop that is kept running on different terminal (maybe different application overall).
+    3. 
+
+## TO START
 
 The beginning will be a very small application that can do small useful things as a starter. 
 
