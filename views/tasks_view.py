@@ -33,7 +33,8 @@ def render_response(response: Dict) -> None: #This function will take the respon
 def render_task(task: Task) -> None:
     """Render a single task"""
     console.print(f"\n[bold]Task Details[/bold]", style="red")
-    console.print(f"ID: {task.id}")
+    console.print(f"Sequential ID: {task.task_id}")
+    console.print(f"UUID: {task.id}")
     console.print(f"Title: {task.title}")
     console.print(f"Description: {task.description}")
     console.print(f"Deadline: {task.deadline}")
@@ -43,7 +44,8 @@ def render_task(task: Task) -> None:
 def render_task_list(tasks: List[Task]) -> None:
     """Render a table of tasks"""
     table = Table(title="All Tasks")
-    table.add_column("ID", style="cyan")
+    table.add_column("Seq ID", style="cyan")
+    table.add_column("UUID", style="magenta")
     table.add_column("Title")
     table.add_column("Description")
     table.add_column("Deadline")
@@ -52,6 +54,7 @@ def render_task_list(tasks: List[Task]) -> None:
     
     for task in tasks:
         table.add_row(
+            str(task.task_id),
             str(task.id),
             task.title,
             task.description,

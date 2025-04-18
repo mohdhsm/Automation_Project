@@ -3,7 +3,8 @@ import typer
 from typing import Optional, List, Dict, Union
 from datetime import datetime
 from models.task import Task
-from controllers.task_controller import TaskController
+from Controllers.task_controller import TaskController
+from views import tasks_view
 
 app = typer.Typer(help="Manage tasks and goals")
 controller = TaskController()
@@ -31,15 +32,22 @@ def create(
 ## THESE ARE THE COMMAND
 @app.command()
 def view(
-    task_id: Optional[str] = typer.Argument(None, help="ID of task to view"),
+    task_id: Optional[str] = typer.Argument(None, help="Task ID (UUID or sequential number) to view"),
     all: bool = typer.Option(False, "--all", help="View all tasks")
 ) -> Dict[str, Union[str, Task, List[Task]]]: #Why we used union? Because it gives the option of using a String, icnase of error, or a task or list of tasks.
     """View task(s)"""
     try:
         if all:
-            tasks = controller.get_all_tasks()
+            tasks = controller.get_all_tasks() # Get the list of tasks.
+            # Render the task list using the view
+            tasks_view.render_response({"status": "success", "tasks": tasks}) # This will render the response using the view
             return {"status": "success", "tasks": tasks}
         elif task_id:
+            # Try to convert to int if it's a sequential ID
+            try:
+                task_id = int(task_id) if task_id.isdigit() else task_id
+            except ValueError:
+                pass
             task = controller.get_task(task_id)
             return {"status": "success", "task": task}
         else:
@@ -49,7 +57,7 @@ def view(
 
 @app.command()
 def edit(
-    task_id: str = typer.Argument(..., help="ID of task to edit"),
+    task_id: str = typer.Argument(..., help="Task ID (UUID or sequential number) to edit"),
     title: Optional[str] = typer.Option(None, help="New title"),
     description: Optional[str] = typer.Option(None, help="New description"),
     deadline: Optional[str] = typer.Option(None, help="New deadline in YYYY-MM-DD format"),
@@ -70,14 +78,19 @@ def edit(
         if not updates:
             return {"status": "error", "message": "No updates provided"}
             
-        updated_task = controller.update_task(task_id, updates)
+            # Try to convert to int if it's a sequential ID
+            try:
+                task_id = int(task_id) if task_id.isdigit() else task_id
+            except ValueError:
+                pass
+            updated_task = controller.update_task(task_id, updates)
         return {"status": "success", "task": updated_task}
     except Exception as e:
         return {"status": "error", "message": str(e)}
 
 @app.command()
 def delete(
-    task_id: str = typer.Argument(..., help="ID of task to delete"),
+    task_id: str = typer.Argument(..., help="Task ID (UUID or sequential number) to delete"),
     force: bool = typer.Option(False, "--force", help="Skip confirmation")
 ) -> Dict[str, str]:
     """Delete a task"""
@@ -87,6 +100,11 @@ def delete(
             if not confirm:
                 return {"status": "cancelled", "message": "Deletion cancelled"}
                 
+        # Try to convert to int if it's a sequential ID
+        try:
+            task_id = int(task_id) if task_id.isdigit() else task_id
+        except ValueError:
+            pass
         controller.delete_task(task_id)
         return {"status": "success", "message": f"Task {task_id} deleted"}
     except Exception as e:

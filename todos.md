@@ -62,9 +62,9 @@ The beginning will be a very small application that can do small useful things a
 There are three functional requirements: User manual adding and removing tasks, retrieving tasks from firefly ai, automated tasks followup. 
 
 1. User should view, edit and list tasks.
-    1. TODO The ID's should be given to the tasks based on regular numbering (from 0 to 99) so it can be referred to later, this will be seperate than the UUID given in the database.
-    2. TODO User should be edit tasks based on thier numerical simple ID.
-    3. TODO  When the task is removed, the IDs are reset again. (It should always have sequential ID from 0 to 99).
+    1. Tasks now have both a UUID and sequential ID (starting from 1)
+    2. Users can reference tasks using either ID type in commands
+    3. Sequential IDs increment and persist (don't reset when tasks are deleted)
     4. The user should be able to filter tasks based on the employees assigned to. (So a command should display the tasks grouped by the person assigned to)
 2. Retrieving tasks from filefly AI:
     1. User should enter a command, after the command is initiated, the app will connect to firefly ai through an api call.
@@ -78,8 +78,8 @@ There are three functional requirements: User manual adding and removing tasks, 
 
 For goals, we have progress and employees who are involved in this goals. The app should follow up and send periodical reports for these goals. 
 
-1. TODO User should be able to view, edit, create the goals. Each goals should be based on a numerical ID (0-99)
-2. TODO once goal is removed, the ID's will be reset so they should be sequential (1 - 99).
+1. TODO User should be able to view, edit, create the goals. Each goal should have both UUID and sequential ID
+2. TODO Implement same ID system for goals as tasks (sequential IDs starting from 1)
 3. TODO Each interval the app will send a reminder to adjust the progress of the goals.
 
 ## PIPEDRIVE REPORTS AND AUTOMATION
@@ -253,8 +253,3 @@ mycli_app/
 │
 └── data/                           # Local cache or meeting transcript folder
     └── meetings/
-
-
-
-
-

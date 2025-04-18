@@ -9,8 +9,8 @@ from dotenv import load_dotenv
 # Import CLI command groups
 from CLI.tasks import app as tasks_app
 from CLI.meeting import app as meetings_app
-from CLI.sales import app as sales_app
-from CLI.reports import app as reports_app
+# from CLI.sales import app as sales_app
+# from CLI.reports import app as reports_app
 
 # Initialize rich console with custom theme
 custom_theme = Theme({
@@ -35,10 +35,10 @@ app = typer.Typer(
 )
 
 # Add command groups 
-app.add_typer(tasks_app, name="tasks", help="Manage tasks and goals")
-app.add_typer(meetings_app, name="meetings", help="Manage meetings and transcripts")
-app.add_typer(sales_app, name="sales", help="Pipedrive sales integration")
-app.add_typer(reports_app, name="reports", help="Generate reports")
+app.add_typer(tasks_app, name="tasks", help="Manage tasks") # added commands from group tasks
+app.add_typer(meetings_app, name="meetings", help="Manage meetings and transcripts") #added from meetings app
+# app.add_typer(sales_app, name="sales", help="Pipedrive sales integration")
+# app.add_typer(reports_app, name="reports", help="Generate reports")
 
 # Configure logging
 logging.basicConfig(
@@ -49,7 +49,8 @@ logging.basicConfig(
 def main():
     """Entry point for the CLI application"""
     try:
-        console.print("[bold]Automation CLI[/bold] - Starting up...", style="info")
+        console.rule("[bold red]MOHAMMED ALHASHIM AUTOMATION APP", style="highlight")
+        console.print("[bold red]Automation CLI - Starting up...", style="info")
         app()
     except Exception as e:
         console.print(f"Error: {e}", style="error")
