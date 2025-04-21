@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 # Import CLI command groups
 from CLI.tasks import app as tasks_app
 from CLI.meeting import app as meetings_app
-# from CLI.sales import app as sales_app
+from CLI.sales import app as sales_app
 # from CLI.reports import app as reports_app
 
 # Initialize rich console with custom theme
@@ -37,7 +37,7 @@ app = typer.Typer(
 # Add command groups 
 app.add_typer(tasks_app, name="tasks", help="Manage tasks") # added commands from group tasks
 app.add_typer(meetings_app, name="meetings", help="Manage meetings and transcripts") #added from meetings app
-# app.add_typer(sales_app, name="sales", help="Pipedrive sales integration")
+app.add_typer(sales_app, name="sales", help="Pipedrive sales integration")
 # app.add_typer(reports_app, name="reports", help="Generate reports")
 
 # Configure logging
