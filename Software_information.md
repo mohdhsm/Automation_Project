@@ -1,12 +1,14 @@
 # GOAL:
 
-1. KPI's AND REPORTS:App to connect to services such as pipedrive and excels and generate kPI's and connect to deepseek AI and generate reports and emails them to people.
+1. KPI's AND REPORTS:App to connect to services such as pipedrive and excels and generate kPI's and connect to deepseek AI and generate reports and emails them to people. 
 2. App to connect to firefliy AI transcription services to download the transcript of meetings, store in database and connect to microsoft outlook and send it to partpicants via email.
-3. Scheduled Reports: Every certain intervals it will connect to supabase and to microsoft email to send follow up report.  
+3. Scheduled Reports: Every certain intervals it will connect to supabase and to microsoft email to send follow up report. 
 4. Monitor some information in realtime (Streaming on one of my screen) (Needs to figure out how to do that)
 5. It shoud be visually appealing so i will be using rich to enhance the visuals.
 6. I will be using supabase for database, so it can be used on different PCs to avoid syncing problems. 
 7. The main objective of this app is to provide with daily and weekly and even hourly updates. For now, I am not interested in monthly updates that any of my staff can do. It should keep me updated on daily basis on the main things in our work. 
+8. Later on it should be implemented in textualize once I finish the command line. 
+
 
 ## INFORMATION THAT REQUIRES DAILY UPDATES WITH
 
@@ -16,6 +18,7 @@
     3. Notes that have been added.
     4. Activities that have been done. 
     5. Short summary report about everyone doing in today.
+    PS. There should be a report or a command that will show a dashboard showing all these things. 
 2. Daily and weekly goals: Since the focus app on the short term.
     1. Daily and weekly sales and visit report (customer visit report).
     2. Daily and weekly report on followup tasks.
@@ -24,6 +27,16 @@
     1. Running every 5 minutes.
     2. It should be a while loop that is kept running on different terminal (maybe different application overall).
     3. 
+4. Operation related items. 
+    1. Today everyone schedule. 
+    2. Location of the labour. (Should read from excel or from ERP)
+    3. Deliveries today. (From odoo)
+    4. Invoices produced today. 
+    5. Purchase orders pending. (From Odoo)
+5. Employee Engagement. 
+    1. Each employees should have a set of goals and KPI's. 
+    2. Deadlines that employees should be.
+    3. Sending periodical notification using deepseek about their performance. 
 
 ## TO START
 
